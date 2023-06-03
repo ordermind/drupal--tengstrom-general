@@ -3,3 +3,5 @@ type: module
 package: Tengström Profile
 description: 'Provides general code for the Tengström profile'
 core_version_requirement: '^9'
+
+version: 0.1.0
