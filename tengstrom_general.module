@@ -1,0 +1,137 @@
+<?php
+
+declare(strict_types=1);
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\tengstrom_general\Helpers\EntityFormHelpers;
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Fires the following hooks:
+ *
+ * - hook_tengstrom_entity_form_alter()
+ * - hook_tengstrom_entity_ACTION_form_alter()
+ */
+function tengstrom_general_form_alter(array &$form, FormStateInterface $formState, string $formId): void {
+  $objForm = $formState->getFormObject();
+  if (EntityFormHelpers::isContentEntityForm($objForm)) {
+    /** @var \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler */
+    $moduleHandler = \Drupal::service('module_handler');
+
+    $moduleHandler->alter('tengstrom_entity_form', $form, $formState, $formId);
+
+    $entityAction = EntityFormHelpers::getContentEntityAction($formState);
+    $moduleHandler->alter('tengstrom_entity_' . $entityAction . '_form', $form, $formState, $formId);
+  }
+}
+
+/**
+ * Implements hook_tengstrom_entity_form_alter().
+ */
+function tengstrom_general_tengstrom_entity_form_alter(array &$form, FormStateInterface $formState, string $formId): void {
+  /** @var \Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\EntityFormAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.entity_form_alter');
+
+  $service->alter($form, $formState, $formId);
+}
+
+/**
+ * Implements hook_tengstrom_entity_ACTION_form_alter().
+ */
+function tengstrom_general_tengstrom_entity_delete_form_alter(array &$form, FormStateInterface $formState, string $formId): void {
+  /** @var \Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\EntityDeleteFormAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.entity_delete_form_alter');
+
+  $service->alter($form, $formState, $formId);
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function tengstrom_general_menu_local_tasks_alter(array &$data): void {
+  /** @var \Drupal\tengstrom_general\HookHandlers\MenuLocalTasksAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.menu_local_tasks_alter');
+
+  $service->alter($data);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tengstrom_general_form_user_admin_permissions_alter(array &$form, FormStateInterface $formState, string $formId): void {
+  /** @var \Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\PermissionsFormAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.permissions_form_alter');
+
+  $service->alter($form, $formState, $formId);
+}
+
+/**
+ * Implements hook_widget_complete_form_alter().
+ */
+function tengstrom_general_widget_complete_form_alter(array &$widgetForm, FormStateInterface $formState, array $context): void {
+  /** @var \Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\WidgetCompleteFormAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.widget_complete_form_alter');
+
+  $service->alter($widgetForm, $formState, $context);
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function tengstrom_general_field_widget_form_alter(&$element, FormStateInterface $formState, array $context) {
+  /** @var \Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\FieldWidgetFormAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.field_widget_form_alter');
+
+  $service->alter($element, $formState, $context);
+}
+
+/**
+ * Implements template_preprocess_entity_add_list().
+ */
+function tengstrom_general_template_preprocess_entity_add_list(array &$variables): void {
+  /** @var \Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessEntityAddListHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.preprocess_entity_add_list');
+
+  $service->preprocess($variables);
+}
+
+/**
+ * Implements template_preprocess_block__PLUGIN_ID().
+ */
+function tengstrom_general_preprocess_block__page_title_block(&$variables) {
+  /** @var \Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessPageTitleBlockHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.preprocess_page_title_block');
+
+  $service->preprocess($variables);
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function tengstrom_general_toolbar_alter(&$items) {
+  /** @var \Drupal\tengstrom_general\HookHandlers\ToolbarAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.toolbar_alter');
+
+  $service->alter($items);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function tengstrom_general_form_system_performance_settings_alter(array &$form, FormStateInterface $formState, string $formId) {
+  /** @var \Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\SystemPerformanceSettingsFormAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.performance_settings_form_alter');
+
+  $service->alter($form, $formState, $formId);
+}
+
+/**
+ * Implements hook_page_attachments().
+ */
+function tengstrom_general_page_attachments(array &$attachments) {
+  /** @var \Drupal\tengstrom_general\HookHandlers\PageAttachmentsHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.page_attachments');
+
+  $service->execute($attachments);
+}

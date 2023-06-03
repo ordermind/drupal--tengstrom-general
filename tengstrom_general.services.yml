@@ -1,0 +1,44 @@
+services:
+  # Overrides
+  menu.default_tree_manipulators:
+    class: Drupal\tengstrom_general\Menu\DefaultMenuLinkTreeManipulators
+    arguments: ['@access_manager', '@current_user', '@entity_type.manager']
+
+  # Hook handlers
+  tengstrom_general.hook_handlers.menu_local_tasks_alter:
+    class: Drupal\tengstrom_general\HookHandlers\MenuLocalTasksAlterHandler
+    arguments: ['@request_stack']
+
+  tengstrom_general.hook_handlers.toolbar_alter:
+    class: Drupal\tengstrom_general\HookHandlers\ToolbarAlterHandler
+
+  tengstrom_general.hook_handlers.entity_form_alter:
+    class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\EntityFormAlterHandler
+    arguments: ['@current_user']
+
+  tengstrom_general.hook_handlers.entity_delete_form_alter:
+    class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\EntityDeleteFormAlterHandler
+    arguments: ['@messenger', '@string_translation']
+
+  tengstrom_general.hook_handlers.permissions_form_alter:
+    class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\PermissionsFormAlterHandler
+
+  tengstrom_general.hook_handlers.widget_complete_form_alter:
+    class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\WidgetCompleteFormAlterHandler
+
+  tengstrom_general.hook_handlers.field_widget_form_alter:
+    class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\FieldWidgetFormAlterHandler
+
+  tengstrom_general.hook_handlers.performance_settings_form_alter:
+    class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\SystemPerformanceSettingsFormAlterHandler
+    arguments: ['@config.factory']
+
+  tengstrom_general.hook_handlers.preprocess_entity_add_list:
+    class: Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessEntityAddListHandler
+    arguments: ['@request_stack']
+
+  tengstrom_general.hook_handlers.preprocess_page_title_block:
+    class: Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessPageTitleBlockHandler
+
+  tengstrom_general.hook_handlers.page_attachments:
+    class: Drupal\tengstrom_general\HookHandlers\PageAttachmentsHandler

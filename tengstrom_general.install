@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Implements hook_install().
+ */
+function tengstrom_general_install() {
+  // Set the weight to 100.
+  module_set_weight('tengstrom_general', 100);
+}
