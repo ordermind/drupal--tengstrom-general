@@ -6,8 +6,8 @@
     Element.prototype._addEventListener = Element.prototype.addEventListener;
     Element.prototype._removeEventListener = Element.prototype.removeEventListener;
 
-    Element.prototype.addEventListener = function (type, listener) {
-        this._addEventListener(type, listener);
+    Element.prototype.addEventListener = function (type, listener, options) {
+        this._addEventListener(type, listener, options);
 
         if (!this.eventListeners) {
             this.eventListeners = {};
@@ -19,8 +19,8 @@
         this.eventListeners[type].push(listener);
     };
 
-    Element.prototype.removeEventListener = function (type, listener) {
-        this._removeEventListener(type, listener);
+    Element.prototype.removeEventListener = function (type, listener, options) {
+        this._removeEventListener(type, listener, options);
 
         if (!this.eventListeners) {
             this.eventListeners = {};
@@ -38,16 +38,16 @@
         this.eventListeners[type].splice(index, 1);
     }
 
-    Element.prototype.prependEventListener = function (type, listener) {
+    Element.prototype.prependEventListener = function (type, listener, options) {
         if (!this.eventListeners[type]) {
             this.eventListeners[type] = [];
         }
 
         const originalEventListeners = [...this.eventListeners[type]];
 
-        originalEventListeners.forEach(callback => this.removeEventListener(type, callback));
-        this.addEventListener(type, listener);
-        originalEventListeners.forEach(callback => this.addEventListener(type, callback));
+        originalEventListeners.forEach(callback => this.removeEventListener(type, callback, options));
+        this.addEventListener(type, listener, options);
+        originalEventListeners.forEach(callback => this.addEventListener(type, callback, options));
     }
 
     /**
