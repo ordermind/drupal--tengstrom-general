@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\tengstrom_general\HookHandlers;
 
-use Drupal\Core\Http\RequestStack;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class MenuLocalTasksAlterHandler {
   protected RequestStack $requestStack;
