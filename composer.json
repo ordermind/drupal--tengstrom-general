@@ -2,7 +2,7 @@
     "name": "drupal/tengstrom_general",
     "type": "drupal-module--tengstrom",
     "require": {
-        "drupal/core": "^9.4"
+        "drupal/core": "^9.4 || ^10"
     }
 }
 
