@@ -19,8 +19,9 @@ class SystemPerformanceSettingsFormAlterHandler implements FormAlterHandlerInter
   }
 
   protected function disableOptionsThatAreOverriddenInSettingsFile(array &$form): void {
-    // The default values for preprocess config do not take the config overrides into account, so in order to avoid
-    // confusion we modify the default value here manually.
+    // The default values for preprocess config do not take the config
+    // overrides into account, so in order to avoid confusion we modify
+    // the default value here manually.
     $systemPerformanceConfig = $this->config->get('system.performance');
     if (!empty($form['bandwidth_optimization']['preprocess_css'])) {
       $form['bandwidth_optimization']['preprocess_css']['#default_value'] = $systemPerformanceConfig->get('css.preprocess');
