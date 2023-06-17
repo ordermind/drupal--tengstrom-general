@@ -9,9 +9,6 @@ services:
     class: Drupal\tengstrom_general\HookHandlers\MenuLocalTasksAlterHandler
     arguments: ['@request_stack']
 
-  tengstrom_general.hook_handlers.toolbar_alter:
-    class: Drupal\tengstrom_general\HookHandlers\ToolbarAlterHandler
-
   tengstrom_general.hook_handlers.entity_form_alter:
     class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\EntityFormAlterHandler
     arguments: ['@current_user']

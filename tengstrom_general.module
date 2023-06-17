@@ -107,16 +107,6 @@ function tengstrom_general_preprocess_block__page_title_block(&$variables) {
 }
 
 /**
- * Implements hook_toolbar_alter().
- */
-function tengstrom_general_toolbar_alter(&$items) {
-  /** @var \Drupal\tengstrom_general\HookHandlers\ToolbarAlterHandler $service */
-  $service = \Drupal::service('tengstrom_general.hook_handlers.toolbar_alter');
-
-  $service->alter($items);
-}
-
-/**
  * Implements hook_form_FORM_ID_alter().
  */
 function tengstrom_general_form_system_performance_settings_alter(array &$form, FormStateInterface $formState, string $formId) {
