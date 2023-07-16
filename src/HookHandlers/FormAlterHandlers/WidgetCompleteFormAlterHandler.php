@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\tengstrom_general\HookHandlers\FormAlterHandlers;
 
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Field\WidgetBase;
+use Drupal\Core\Form\FormStateInterface;
 
 class WidgetCompleteFormAlterHandler implements WidgetFormAlterHandlerInterface {
 
