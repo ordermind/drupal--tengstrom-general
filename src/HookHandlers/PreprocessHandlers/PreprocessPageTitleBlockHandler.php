@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Drupal\tengstrom_general\HookHandlers\PreprocessHandlers;
 
+use Ordermind\DrupalTengstromShared\HookHandlers\PreprocessHandlerInterface;
+
 class PreprocessPageTitleBlockHandler implements PreprocessHandlerInterface {
 
   public function preprocess(array &$variables): void {

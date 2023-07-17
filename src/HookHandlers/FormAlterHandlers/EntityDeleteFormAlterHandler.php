@@ -7,7 +7,8 @@ namespace Drupal\tengstrom_general\HookHandlers\FormAlterHandlers;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\StringTranslation\TranslationInterface;
-use Drupal\tengstrom_general\Helpers\EntityFormHelpers;
+use Ordermind\DrupalTengstromShared\Helpers\EntityFormHelpers;
+use Ordermind\DrupalTengstromShared\HookHandlers\FormAlterHandlerInterface;
 
 class EntityDeleteFormAlterHandler implements FormAlterHandlerInterface {
   protected MessengerInterface $messenger;

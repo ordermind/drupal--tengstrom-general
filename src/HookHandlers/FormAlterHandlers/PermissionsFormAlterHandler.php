@@ -6,6 +6,7 @@ namespace Drupal\tengstrom_general\HookHandlers\FormAlterHandlers;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Ordermind\DrupalTengstromShared\HookHandlers\FormAlterHandlerInterface;
 
 class PermissionsFormAlterHandler implements FormAlterHandlerInterface {
 

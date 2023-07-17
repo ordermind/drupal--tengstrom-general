@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drupal\tengstrom_general\HookHandlers\PreprocessHandlers;
 
 use Drupal\Core\Link;
+use Ordermind\DrupalTengstromShared\HookHandlers\PreprocessHandlerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class PreprocessEntityAddListHandler implements PreprocessHandlerInterface {

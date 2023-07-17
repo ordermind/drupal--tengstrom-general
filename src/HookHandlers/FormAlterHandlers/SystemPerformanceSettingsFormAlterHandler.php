@@ -6,6 +6,7 @@ namespace Drupal\tengstrom_general\HookHandlers\FormAlterHandlers;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Ordermind\DrupalTengstromShared\HookHandlers\FormAlterHandlerInterface;
 
 class SystemPerformanceSettingsFormAlterHandler implements FormAlterHandlerInterface {
   protected ConfigFactoryInterface $config;

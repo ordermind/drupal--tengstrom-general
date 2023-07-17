@@ -6,6 +6,7 @@ namespace Drupal\tengstrom_general\HookHandlers\FormAlterHandlers;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Session\AccountProxyInterface;
+use Ordermind\DrupalTengstromShared\HookHandlers\FormAlterHandlerInterface;
 
 class EntityFormAlterHandler implements FormAlterHandlerInterface {
   protected AccountProxyInterface $account;

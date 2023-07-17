@@ -6,6 +6,7 @@ namespace Drupal\tengstrom_general\HookHandlers\FormAlterHandlers;
 
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Ordermind\DrupalTengstromShared\HookHandlers\WidgetFormAlterHandlerInterface;
 
 class WidgetCompleteFormAlterHandler implements WidgetFormAlterHandlerInterface {
 
