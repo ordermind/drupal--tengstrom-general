@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Drupal\tengstrom_general\Drush\Commands;
 
 use Drupal\Core\Extension\ModuleInstallerInterface;
