@@ -1,0 +1,5 @@
+services:
+  tengstrom_general.dev_module_commands:
+    class: Drupal\tengstrom_general\Drush\Commands\DevModulesCommands
+    tags:
+      -  { name: drush.command }
