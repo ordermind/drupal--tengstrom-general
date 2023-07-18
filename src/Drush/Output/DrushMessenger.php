@@ -50,7 +50,7 @@ class DrushMessenger {
       return $output;
     };
 
-    $output = &drupal_static(static::class . '::getReference');
+    $output = &drupal_static(static::class . '::getOutput');
     if (!$output) {
       $output = $initializeNewInstance();
     }
