@@ -42,5 +42,5 @@ services:
 
   # Other services
 
-  tengstrom_general.drush_output:
-    class: Drupal\tengstrom_general\Drush\Output\StyledDrushOutput
+  tengstrom_general.drush_messenger:
+    class: Drupal\tengstrom_general\Drush\Output\DrushMessenger

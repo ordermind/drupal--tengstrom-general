@@ -8,22 +8,22 @@ use Drush\Drush;
 use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class StyledDrushOutput {
+class DrushMessenger {
 
   public function success(string $message): void {
-    $this->getInstance()->writeln('<success>[success]</success> ' . $message);
+    $this->getOutput()->writeln('<success>[success]</success> ' . $message);
   }
 
   public function notice(string $message): void {
-    $this->getInstance()->writeln('<notice>[notice]</notice> ' . $message);
+    $this->getOutput()->writeln('<notice>[notice]</notice> ' . $message);
   }
 
   public function error(string $message): void {
-    $this->getInstance()->writeln('<error>[error]</error> <error>' . $message . '</error>');
+    $this->getOutput()->writeln('<error>[error]</error> <error>' . $message . '</error>');
   }
 
   public function blankLine(): void {
-    $this->getInstance()->writeln('');
+    $this->getOutput()->writeln('');
   }
 
   /**
@@ -33,7 +33,7 @@ class StyledDrushOutput {
    * the service only exists in the Drush container, not in the regular Drupal
    * container.
    */
-  public function getInstance(): OutputInterface {
+  public function getOutput(): OutputInterface {
     $initializeNewInstance = function () {
       $output = Drush::output();
       $formatter = $output->getFormatter();
