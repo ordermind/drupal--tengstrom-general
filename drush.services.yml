@@ -1,5 +1,6 @@
 services:
   tengstrom_general.dev_module_commands:
     class: Drupal\tengstrom_general\Drush\Commands\DevModulesCommands
+    arguments: ['@config.factory', '@module_installer', '@module_handler', '@theme_handler', '@extension.list.module']
     tags:
       -  { name: drush.command }

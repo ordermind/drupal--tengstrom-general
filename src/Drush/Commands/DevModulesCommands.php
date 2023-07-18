@@ -4,52 +4,18 @@ declare(strict_types=1);
 
 namespace Drupal\tengstrom_general\Drush\Commands;
 
-use Drupal\Core\Extension\ModuleInstallerInterface;
-use Drupal\Core\Messenger\MessengerInterface;
 use Drupal\Core\Site\Settings;
-use Drupal\Core\StringTranslation\StringTranslationTrait;
-use Drush\Drupal\Commands\core\MessengerCommands;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drush\Drupal\Commands\pm\PmCommands;
 
-/**
- * A Drush commandfile.
- */
-class DevModulesCommands extends MessengerCommands {
-  use StringTranslationTrait;
-
-  protected ModuleInstallerInterface $moduleInstaller;
-
-  public function __construct(MessengerInterface $messenger, ModuleInstallerInterface $moduleInstaller) {
-    parent::__construct($messenger);
-
-    $this->moduleInstaller = $moduleInstaller;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container) {
-    return new static(
-      $container->get('messenger'),
-      $container->get('module_installer')
-    );
-  }
+class DevModulesCommands extends PmCommands {
 
   /**
    * Command for installing dev modules
    *
    * @command tengstrom-general:install-dev-modules
    */
-  public function install() {
-    $devModules = Settings::get('dev_modules', []);
-    if (!$devModules) {
-      $this->messenger->addError($this->t('No dev modules could be found'));
-
-      return;
-    }
-
-    $this->moduleInstaller->install($devModules);
-    $this->messenger->addStatus($this->t('Dev modules were successfully installed!'));
+  public function installDevModules(): void {
+    parent::install($this->getDevModules());
   }
 
   /**
@@ -57,16 +23,17 @@ class DevModulesCommands extends MessengerCommands {
    *
    * @command tengstrom-general:uninstall-dev-modules
    */
-  public function uninstall() {
+  public function uninstallDevModules() {
+    parent::uninstall($this->getDevModules());
+  }
+
+  protected function getDevModules(): array {
     $devModules = Settings::get('dev_modules', []);
     if (!$devModules) {
-      $this->messenger->addError($this->t('No dev modules could be found'));
-
-      return;
+      throw new \LogicException('No dev modules could be found');
     }
 
-    $this->moduleInstaller->uninstall($devModules);
-    $this->messenger->addStatus($this->t('Dev modules were successfully uninstalled!'));
+    return $devModules;
   }
 
 }
