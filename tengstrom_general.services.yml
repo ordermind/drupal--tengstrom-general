@@ -39,3 +39,8 @@ services:
 
   tengstrom_general.hook_handlers.page_attachments:
     class: Drupal\tengstrom_general\HookHandlers\PageAttachmentsHandler
+
+  # Other services
+
+  tengstrom_general.drush_output:
+    class: Drupal\tengstrom_general\Drush\Output\StyledDrushOutput
