@@ -42,5 +42,9 @@ services:
 
   # Other services
 
+  tengstrom_general.entity_repository:
+    class: Drupal\tengstrom_general\Repository\EntityRepository
+    arguments: ['@entity_type.manager']
+
   tengstrom_general.drush_messenger:
     class: Drupal\tengstrom_general\Drush\Output\DrushMessenger
