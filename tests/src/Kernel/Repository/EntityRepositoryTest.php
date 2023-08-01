@@ -60,7 +60,7 @@ class EntityRepositoryTest extends EntityKernelTestBase {
     $this->assertSame($expectedResult, $result);
   }
 
-  public function testFetchEntitiessOfType(): void {
+  public function testFetchEntitiesOfType(): void {
     /** @var \Drupal\tengstrom_general\Repository\EntityRepository $repository */
     $repository = \Drupal::service('tengstrom_general.entity_repository');
 
