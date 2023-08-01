@@ -10,7 +10,8 @@
     ],
     "require": {
         "drupal/core": "^9.4 || ^10",
-        "ordermind/drupal--tengstrom-shared": "dev-master"
+        "ordermind/drupal--tengstrom-shared": "dev-master",
+        "ordermind/php-helpers": "^1.0"
     }
 }
 

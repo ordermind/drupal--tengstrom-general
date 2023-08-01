@@ -32,12 +32,15 @@ class EntityRepository implements EntityRepositoryInterface {
     $entityQuery = $storage->getQuery()
       ->accessCheck(FALSE);
 
+    $currentIndex = 0;
     while (
       $entityIds = $entityQuery
-        ->range(0, $chunkSize)
+        ->range($currentIndex, $chunkSize)
         ->execute()
     ) {
       yield $entityIds;
+
+      $currentIndex += $chunkSize;
     }
   }
 
