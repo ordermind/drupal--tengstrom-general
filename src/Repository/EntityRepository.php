@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Drupal\tengstrom_general\Repository;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
 class EntityRepository {
@@ -46,6 +47,21 @@ class EntityRepository {
     foreach ($this->fetchEntityIdsOfType($entityTypeId, $chunkSize) as $entityIds) {
       yield $storage->loadMultiple($entityIds);
     }
+  }
+
+  public function fetchFirstEntityOfType(string $entityTypeId): ?EntityInterface {
+    $storage = $this->entityTypeManager->getStorage($entityTypeId);
+
+    $entityIds = $storage->getQuery()
+      ->accessCheck(FALSE)
+      ->range(0, 1)
+      ->execute();
+
+    if (!$entityIds) {
+      return NULL;
+    }
+
+    return $storage->load(reset($entityIds));
   }
 
 }
