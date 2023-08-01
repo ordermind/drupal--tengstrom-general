@@ -14,20 +14,18 @@ interface EntityRepositoryInterface {
   public function countEntitiesOfType(string $entityTypeId): int;
 
   /**
-   * Fetch all entity ids of a certain type. This method yields chunks of entity
-   * ids using a generator.
+   * Fetch the entity ids of a certain type.
    *
-   * @return \Generator|int[][]
+   * @return int[]
    */
-  public function fetchEntityIdsOfType(string $entityTypeId, int $chunkSize): \Generator;
+  public function fetchEntityIdsOfType(string $entityTypeId, int $offset = 0, int $chunkSize = 100): array;
 
   /**
-   * Fetch all entities of a certain type. This method yields chunks of entities
-   * using a generator.
+   * Fetch the entities of a certain type.
    *
-   * @return \Generator|EntityInterface[][]
+   * @return \Drupal\Core\Entity\EntityInterface[]
    */
-  public function fetchEntitiesOfType(string $entityTypeId, int $chunkSize): \Generator;
+  public function fetchEntitiesOfType(string $entityTypeId, int $offset = 0, int $chunkSize = 100): array;
 
   /**
    * Fetch the first entity of a certain type

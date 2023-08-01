@@ -26,33 +26,27 @@ class EntityRepository implements EntityRepositoryInterface {
   /**
    * {@inheritDoc}
    */
-  public function fetchEntityIdsOfType(string $entityTypeId, int $chunkSize): \Generator {
+  public function fetchEntityIdsOfType(string $entityTypeId, int $offset = 0, int $chunkSize = 100): array {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
 
-    $entityQuery = $storage->getQuery()
-      ->accessCheck(FALSE);
-
-    $currentIndex = 0;
-    while (
-      $entityIds = $entityQuery
-        ->range($currentIndex, $chunkSize)
-        ->execute()
-    ) {
-      yield $entityIds;
-
-      $currentIndex += $chunkSize;
-    }
+    return $storage->getQuery()
+      ->accessCheck(FALSE)
+      ->range($offset, $chunkSize)
+      ->execute();
   }
 
   /**
    * {@inheritDoc}
    */
-  public function fetchEntitiesOfType(string $entityTypeId, int $chunkSize): \Generator {
+  public function fetchEntitiesOfType(string $entityTypeId, int $offset = 0, int $chunkSize = 100): array {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
 
-    foreach ($this->fetchEntityIdsOfType($entityTypeId, $chunkSize) as $entityIds) {
-      yield $storage->loadMultiple($entityIds);
+    $entityIds = $this->fetchEntityIdsOfType($entityTypeId, $offset, $chunkSize);
+    if (!$entityIds) {
+      return [];
     }
+
+    return $storage->loadMultiple($entityIds);
   }
 
   /**
@@ -61,11 +55,7 @@ class EntityRepository implements EntityRepositoryInterface {
   public function fetchFirstEntityOfType(string $entityTypeId): ?EntityInterface {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
 
-    $entityIds = $storage->getQuery()
-      ->accessCheck(FALSE)
-      ->range(0, 1)
-      ->execute();
-
+    $entityIds = $this->fetchEntityIdsOfType($entityTypeId, 0, 1);
     if (!$entityIds) {
       return NULL;
     }

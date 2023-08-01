@@ -37,24 +37,13 @@ class EntityRepositoryTest extends EntityKernelTestBase {
   public function testFetchEntityIdsOfType(): void {
     /** @var \Drupal\tengstrom_general\Repository\EntityRepository $repository */
     $repository = \Drupal::service('tengstrom_general.entity_repository');
-    $result = iterator_to_array($repository->fetchEntityIdsOfType('node', 4));
+    $result = $repository->fetchEntityIdsOfType('node', 2, 5);
     $expectedResult = [
-      [
-        1 => '2',
-        2 => '4',
-        3 => '6',
-        4 => '8',
-      ],
-      [
-        5 => '10',
-        6 => '12',
-        7 => '14',
-        8 => '16',
-      ],
-      [
-        9 => '18',
-        10 => '20',
-      ],
+      3 => '6',
+      4 => '8',
+      5 => '10',
+      6 => '12',
+      7 => '14',
     ];
 
     $this->assertSame($expectedResult, $result);
@@ -64,28 +53,19 @@ class EntityRepositoryTest extends EntityKernelTestBase {
     /** @var \Drupal\tengstrom_general\Repository\EntityRepository $repository */
     $repository = \Drupal::service('tengstrom_general.entity_repository');
 
-    $result = [];
-    foreach ($repository->fetchEntitiesOfType('node', 4) as $entities) {
-      $result[] = array_map(fn (EntityInterface $entity) => $entity->id(), $entities);
-    }
+    $result = array_map(fn (EntityInterface $entity) => $entity->id(), $repository->fetchEntitiesOfType('node'));
 
     $expectedResult = [
-      [
-        2 => '2',
-        4 => '4',
-        6 => '6',
-        8 => '8',
-      ],
-      [
-        10 => '10',
-        12 => '12',
-        14 => '14',
-        16 => '16',
-      ],
-      [
-        18 => '18',
-        20 => '20',
-      ],
+      2 => '2',
+      4 => '4',
+      6 => '6',
+      8 => '8',
+      10 => '10',
+      12 => '12',
+      14 => '14',
+      16 => '16',
+      18 => '18',
+      20 => '20',
     ];
 
     $this->assertSame($expectedResult, $result);
