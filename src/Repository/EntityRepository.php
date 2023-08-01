@@ -7,13 +7,16 @@ namespace Drupal\tengstrom_general\Repository;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 
-class EntityRepository {
+class EntityRepository implements EntityRepositoryInterface {
   protected EntityTypeManagerInterface $entityTypeManager;
 
   public function __construct(EntityTypeManagerInterface $entityTypeManager) {
     $this->entityTypeManager = $entityTypeManager;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function countEntitiesOfType(string $entityTypeId): int {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
 
@@ -21,7 +24,7 @@ class EntityRepository {
   }
 
   /**
-   * @return \Generator|int[][]
+   * {@inheritDoc}
    */
   public function fetchEntityIdsOfType(string $entityTypeId, int $chunkSize): \Generator {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
@@ -39,7 +42,7 @@ class EntityRepository {
   }
 
   /**
-   * @return \Generator|EntityInterface[][]
+   * {@inheritDoc}
    */
   public function fetchEntitiesOfType(string $entityTypeId, int $chunkSize): \Generator {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
@@ -49,6 +52,9 @@ class EntityRepository {
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function fetchFirstEntityOfType(string $entityTypeId): ?EntityInterface {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
 
