@@ -17,6 +17,23 @@ class EntityRepository implements EntityRepositoryInterface {
   /**
    * {@inheritDoc}
    */
+  public function hasEntityIdForType(string $entityTypeId, int $entityId): bool {
+    $storage = $this->entityTypeManager->getStorage($entityTypeId);
+    $identifierField = $storage->getEntityTypeId();
+
+    $result = $storage
+      ->getQuery()
+      ->accessCheck(FALSE)
+      ->condition($identifierField, $entityId, '=')
+      ->count()
+      ->execute();
+
+    return $result > 0;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   public function countEntitiesOfType(string $entityTypeId): int {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
 

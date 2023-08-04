@@ -9,6 +9,11 @@ use Drupal\Core\Entity\EntityInterface;
 interface EntityRepositoryInterface {
 
   /**
+   * Check if an entity id exists in the database for a certain entity type.
+   */
+  public function hasEntityIdForType(string $entityTypeId, int $entityId): bool;
+
+  /**
    * Count all persisted entities of a certain entity type.
    */
   public function countEntitiesOfType(string $entityTypeId): int;
