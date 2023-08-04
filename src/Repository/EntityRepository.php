@@ -21,14 +21,13 @@ class EntityRepository implements EntityRepositoryInterface {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
     $identifierField = $storage->getEntityType()->getKey('id');
 
-    $result = $storage
-      ->getQuery()
+    $result = $storage->getQuery()
       ->accessCheck(FALSE)
       ->condition($identifierField, $entityId, '=')
-      ->count()
+      ->range(0, 1)
       ->execute();
 
-    return $result > 0;
+    return count($result) > 0;
   }
 
   /**
