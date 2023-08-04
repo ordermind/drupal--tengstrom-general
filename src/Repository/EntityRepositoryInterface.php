@@ -11,7 +11,7 @@ interface EntityRepositoryInterface {
   /**
    * Check if an entity id exists in the database for a certain entity type.
    */
-  public function hasEntityIdForType(string $entityTypeId, int $entityId): bool;
+  public function hasEntityIdForType(string $entityTypeId, int|string $entityId): bool;
 
   /**
    * Count all persisted entities of a certain entity type.
@@ -21,7 +21,7 @@ interface EntityRepositoryInterface {
   /**
    * Fetch the entity ids of a certain type.
    *
-   * @return int[]
+   * @return int[]|string[]
    */
   public function fetchEntityIdsOfType(string $entityTypeId, int $offset = 0, int $chunkSize = 100): array;
 

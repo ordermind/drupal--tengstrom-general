@@ -17,7 +17,7 @@ class EntityRepository implements EntityRepositoryInterface {
   /**
    * {@inheritDoc}
    */
-  public function hasEntityIdForType(string $entityTypeId, int $entityId): bool {
+  public function hasEntityIdForType(string $entityTypeId, int|string $entityId): bool {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
     $identifierField = $storage->getEntityType()->getKey('id');
 
