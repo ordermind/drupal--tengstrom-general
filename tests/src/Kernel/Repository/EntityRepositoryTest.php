@@ -6,6 +6,7 @@ namespace Drupal\Tests\tengstrom_general\Kernel\Repository;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\KernelTests\Core\Entity\EntityKernelTestBase;
+use Drupal\tengstrom_general\Repository\EntityRepository;
 use Drupal\Tests\node\Traits\ContentTypeCreationTrait;
 use Drupal\Tests\node\Traits\NodeCreationTrait;
 
@@ -28,15 +29,23 @@ class EntityRepositoryTest extends EntityKernelTestBase {
     }
   }
 
+  protected function getRepository(): EntityRepository {
+    return \Drupal::service('tengstrom_general.entity_repository');
+  }
+
+  public function testHasEntityIdForType(): void {
+    $repository = $this->getRepository();
+    $this->assertTrue($repository->hasEntityIdForType('node', 10));
+    $this->assertFalse($repository->hasEntityIdForType('node', 500));
+  }
+
   public function testCountEntitiesOfType(): void {
-    /** @var \Drupal\tengstrom_general\Repository\EntityRepository $repository */
-    $repository = \Drupal::service('tengstrom_general.entity_repository');
+    $repository = $this->getRepository();
     $this->assertSame(10, $repository->countEntitiesOfType('node'));
   }
 
   public function testFetchEntityIdsOfType(): void {
-    /** @var \Drupal\tengstrom_general\Repository\EntityRepository $repository */
-    $repository = \Drupal::service('tengstrom_general.entity_repository');
+    $repository = $this->getRepository();
     $result = $repository->fetchEntityIdsOfType('node', 2, 5);
     $expectedResult = [
       3 => '6',
@@ -50,8 +59,7 @@ class EntityRepositoryTest extends EntityKernelTestBase {
   }
 
   public function testFetchEntitiesOfType(): void {
-    /** @var \Drupal\tengstrom_general\Repository\EntityRepository $repository */
-    $repository = \Drupal::service('tengstrom_general.entity_repository');
+    $repository = $this->getRepository();
 
     $result = array_map(fn (EntityInterface $entity) => $entity->id(), $repository->fetchEntitiesOfType('node'));
 
@@ -72,8 +80,7 @@ class EntityRepositoryTest extends EntityKernelTestBase {
   }
 
   public function testFetchFirstEntityOfType(): void {
-    /** @var \Drupal\tengstrom_general\Repository\EntityRepository $repository */
-    $repository = \Drupal::service('tengstrom_general.entity_repository');
+    $repository = $this->getRepository();
 
     $this->assertSame('2', $repository->fetchFirstEntityOfType('node')->id());
   }

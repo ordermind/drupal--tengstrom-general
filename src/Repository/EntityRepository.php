@@ -19,7 +19,7 @@ class EntityRepository implements EntityRepositoryInterface {
    */
   public function hasEntityIdForType(string $entityTypeId, int $entityId): bool {
     $storage = $this->entityTypeManager->getStorage($entityTypeId);
-    $identifierField = $storage->getEntityTypeId();
+    $identifierField = $storage->getEntityType()->getKey('id');
 
     $result = $storage
       ->getQuery()
