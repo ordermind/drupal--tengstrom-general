@@ -125,3 +125,13 @@ function tengstrom_general_page_attachments(array &$attachments) {
 
   $service->execute($attachments);
 }
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function tengstrom_general_element_info_alter(array &$info) {
+  /** @var \Drupal\tengstrom_general\HookHandlers\ElementInfoAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.element_info_alter');
+
+  $service->alter($info);
+}
