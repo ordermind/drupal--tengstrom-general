@@ -29,12 +29,38 @@ class ElementInfoAlterHandler implements TrustedCallbackInterface {
    * Hides help and guidelines elements according to configuration.
    */
   public static function preRenderTextFormat(array $element) {
-    if (!empty($element['#hide_help']) && !empty($element['format']['help'])) {
+    $hideFormatSection = !empty($element['#hide_format_section']) && !empty($element['format']);
+    $hideHelp = !empty($element['#hide_help']);
+    $hideGuideLines = !empty($element['#hide_guidelines']);
+    $helpElementExists = !empty($element['format']['help']);
+    $guidelinesElementExists = !empty($element['format']['guidelines']);
+
+    // If there is no more than one allowed format and that one format
+    // has already been selected, always hide the whole format section.
+    // Conversely, if there is more than one allowed format, never hide
+    // the whole format section.
+    if (
+      !empty($element['#allowed_formats'])
+      && count($element['#allowed_formats']) == 1
+      && !empty($element['#format'])
+      && reset($element['#allowed_formats']) === $element['#format']
+    ) {
+      $hideFormatSection = TRUE;
+    }
+    elseif (!empty($element['#allowed_formats']) && count($element['#allowed_formats']) > 1) {
+      $hideFormatSection = FALSE;
+    }
+
+    if (($hideHelp || $hideFormatSection) && $helpElementExists) {
       $element['format']['help']['#access'] = FALSE;
     }
 
-    if (!empty($element['#hide_guidelines']) && !empty($element['format']['guidelines'])) {
+    if (($hideGuideLines || $hideFormatSection) && $guidelinesElementExists) {
       $element['format']['guidelines']['#access'] = FALSE;
+    }
+
+    if ($hideFormatSection) {
+      $element['format']['#attributes']['class'][] = 'hidden';
     }
 
     return $element;
