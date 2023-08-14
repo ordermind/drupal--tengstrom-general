@@ -26,9 +26,6 @@ services:
   tengstrom_general.hook_handlers.widget_complete_form_alter:
     class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\WidgetCompleteFormAlterHandler
 
-  tengstrom_general.hook_handlers.field_widget_form_alter:
-    class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\FieldWidgetFormAlterHandler
-
   tengstrom_general.hook_handlers.performance_settings_form_alter:
     class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\SystemPerformanceSettingsFormAlterHandler
     arguments: ['@config.factory']
