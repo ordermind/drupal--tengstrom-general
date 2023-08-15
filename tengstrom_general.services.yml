@@ -5,9 +5,9 @@ services:
     arguments: ['@access_manager', '@current_user', '@entity_type.manager']
 
   # Hook handlers
-  tengstrom_general.hook_handlers.menu_local_tasks_alter:
-    class: Drupal\tengstrom_general\HookHandlers\MenuLocalTasksAlterHandler
-    arguments: ['@request_stack']
+  tengstrom_general.hook_handlers.cancel_button_destination_alter:
+    class: Drupal\tengstrom_general\HookHandlers\CancelButtonDestinationAlterHandler
+    arguments: ['@config.factory']
 
   tengstrom_general.hook_handlers.entity_form_alter:
     class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\EntityFormAlterHandler
@@ -20,11 +20,15 @@ services:
   tengstrom_general.hook_handlers.element_info_alter:
     class: Drupal\tengstrom_general\HookHandlers\ElementInfoAlterHandler
 
+  tengstrom_general.hook_handlers.menu_local_tasks_alter:
+    class: Drupal\tengstrom_general\HookHandlers\MenuLocalTasksAlterHandler
+    arguments: ['@request_stack']
+
+  tengstrom_general.hook_handlers.page_attachments:
+    class: Drupal\tengstrom_general\HookHandlers\PageAttachmentsHandler
+
   tengstrom_general.hook_handlers.permissions_form_alter:
     class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\PermissionsFormAlterHandler
-
-  tengstrom_general.hook_handlers.widget_complete_form_alter:
-    class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\WidgetCompleteFormAlterHandler
 
   tengstrom_general.hook_handlers.performance_settings_form_alter:
     class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\SystemPerformanceSettingsFormAlterHandler
@@ -37,8 +41,8 @@ services:
   tengstrom_general.hook_handlers.preprocess_page_title_block:
     class: Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessPageTitleBlockHandler
 
-  tengstrom_general.hook_handlers.page_attachments:
-    class: Drupal\tengstrom_general\HookHandlers\PageAttachmentsHandler
+  tengstrom_general.hook_handlers.widget_complete_form_alter:
+    class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\WidgetCompleteFormAlterHandler
 
   # Other services
 
