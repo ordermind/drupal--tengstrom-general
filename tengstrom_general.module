@@ -128,6 +128,16 @@ function tengstrom_general_preprocess_entity_add_list(array &$variables): void {
 }
 
 /**
+ * Implements template_preprocess_field_multiple_value_form().
+ */
+function tengstrom_general_preprocess_field_multiple_value_form(array &$variables): void {
+  /** @var \Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessFieldMultipleValueFormHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.preprocess_field_multiple_value_form');
+
+  $service->preprocess($variables);
+}
+
+/**
  * Implements hook_widget_complete_form_alter().
  */
 function tengstrom_general_widget_complete_form_alter(array &$widgetForm, FormStateInterface $formState, array $context): void {
