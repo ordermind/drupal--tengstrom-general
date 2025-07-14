@@ -19,7 +19,7 @@ class ElementInfoAlterHandlerTest extends UnitTestCase {
     $this->assertSame($expectedResult, ElementInfoAlterHandler::hideFormatElements($element));
   }
 
-  public function provideHideFormatElementCases(): \Generator {
+  public static function provideHideFormatElementCases(): \Generator {
     // Do nothing for an empty array that misses all elements.
     yield [[], []];
 
