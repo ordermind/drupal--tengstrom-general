@@ -39,6 +39,9 @@
     }
 
     Element.prototype.prependEventListener = function (type, listener, options) {
+        if (!this.eventListeners) {
+            this.eventListeners = {};
+        }
         if (!this.eventListeners[type]) {
             this.eventListeners[type] = [];
         }
