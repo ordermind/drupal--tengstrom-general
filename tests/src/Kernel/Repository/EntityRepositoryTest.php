@@ -20,8 +20,8 @@ class EntityRepositoryTest extends EntityKernelTestBase {
     parent::setUp();
 
     $this->enableModules(['node', 'tengstrom_general']);
-    $this->installConfig(['node']);
     $this->installEntitySchema('node');
+    $this->installConfig(['node']);
     $this->createContentType(['type' => 'bundle_1', 'name' => 'Bundle 1']);
 
     foreach (xrange(1, 10) as $id) {
