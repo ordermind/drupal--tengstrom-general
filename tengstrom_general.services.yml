@@ -2,7 +2,7 @@ services:
   # Overrides
   menu.default_tree_manipulators:
     class: Drupal\tengstrom_general\Menu\DefaultMenuLinkTreeManipulators
-    arguments: ['@access_manager', '@current_user', '@entity_type.manager']
+    arguments: ['@access_manager', '@current_user', '@entity_type.manager', '@module_handler']
 
   # Hook handlers
   tengstrom_general.hook_handlers.cancel_button_destination_alter:
