@@ -1,33 +1,49 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Drupal\tengstrom_general\Drush\Commands;
 
+use Drush\Attributes as CLI;
+use Drush\Commands\AutowireTrait;
+use Drush\Commands\DrushCommands;
 use Drupal\Core\Site\Settings;
-use Drush\Drupal\Commands\pm\PmCommands;
+use Drush\Commands\pm\PmCommands;
 
-class DevModulesCommands extends PmCommands {
+/**
+ * A Drush commandfile.
+ *
+ */
+final class DevModulesCommands extends DrushCommands {
+
+  use AutowireTrait;
 
   /**
-   * Command for installing dev modules
-   *
-   * @command tengstrom-general:install-dev-modules
+   * Constructs a DevModulesCommands object.
    */
-  public function installDevModules(): void {
-    parent::install($this->getDevModules());
+  public function __construct(
+    private PmCommands $pmCommands,
+  ) {
+    parent::__construct();
   }
 
   /**
-   * Command for uninstalling dev modules
-   *
-   * @command tengstrom-general:uninstall-dev-modules
+   * Command for installing dev modules.
    */
+  #[CLI\Command(name: 'tengstrom-general:install-dev-modules')]
+  public function installDevModules() {
+    // $this->pmCommands->install($this->getDevModules());
+    $this->output()->writeln("Command temporarily disabled due to bugs in the tracer and webprofiler modules.");
+  }
+
+  /**
+   * Command for uninstalling dev modules.
+   */
+  #[CLI\Command(name: 'tengstrom-general:uninstall-dev-modules')]
   public function uninstallDevModules() {
-    parent::uninstall($this->getDevModules());
+    // $this->pmCommands->uninstall($this->getDevModules());
+    $this->output()->writeln("Command temporarily disabled due to bugs in the tracer and webprofiler modules.");
   }
 
-  protected function getDevModules(): array {
+  private function getDevModules(): array {
     $devModules = Settings::get('dev_modules', []);
     if (!$devModules) {
       throw new \LogicException('No dev modules could be found');
