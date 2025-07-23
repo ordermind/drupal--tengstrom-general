@@ -16,6 +16,10 @@ class PreprocessPageTitleBlockHandler implements PreprocessHandlerInterface {
    * This allows the page title to be a container which creates more freedom.
    */
   protected function supportComplexPageTitleStructure(array &$variables): void {
+    if (empty($variables['content']['#title'])) {
+      return;
+    }
+
     if (!is_array($variables['content']['#title'])) {
       return;
     }
