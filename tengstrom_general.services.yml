@@ -41,6 +41,9 @@ services:
   tengstrom_general.hook_handlers.preprocess_field_multiple_value_form:
     class: Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessFieldMultipleValueFormHandler
 
+  tengstrom_general.hook_handlers.preprocess_image_widget_handler:
+    class: Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessImageWidgetHandler
+
   tengstrom_general.hook_handlers.preprocess_page_title_block:
     class: Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessPageTitleBlockHandler
 

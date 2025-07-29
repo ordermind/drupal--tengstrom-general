@@ -138,6 +138,16 @@ function tengstrom_general_preprocess_field_multiple_value_form(array &$variable
 }
 
 /**
+ * Implements template_preprocess_image_widget().
+ */
+function tengstrom_general_preprocess_image_widget(array &$variables): void {
+  /** @var \Drupal\tengstrom_general\HookHandlers\PreprocessHandlers\PreprocessImageWidgetHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.preprocess_image_widget_handler');
+
+  $service->preprocess($variables);
+}
+
+/**
  * Implements hook_widget_complete_form_alter().
  */
 function tengstrom_general_widget_complete_form_alter(array &$widgetForm, FormStateInterface $formState, array $context): void {
