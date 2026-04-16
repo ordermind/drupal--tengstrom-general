@@ -17,6 +17,9 @@ services:
     class: Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\EntityDeleteFormAlterHandler
     arguments: ['@messenger', '@string_translation']
 
+  tengstrom_general.hook_handlers.entity_operations_alter:
+    class: Drupal\tengstrom_general\HookHandlers\EntityOperationsAlterHandler
+
   tengstrom_general.hook_handlers.element_info_alter:
     class: Drupal\tengstrom_general\HookHandlers\ElementInfoAlterHandler
 

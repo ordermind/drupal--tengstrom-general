@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 use Ordermind\DrupalTengstromShared\Helpers\EntityFormHelpers;
@@ -65,6 +66,16 @@ function tengstrom_general_form_user_admin_permissions_alter(array &$form, FormS
   $service = \Drupal::service('tengstrom_general.hook_handlers.permissions_form_alter');
 
   $service->alter($form, $formState, $formId);
+}
+
+/**
+ * Implements hook_entity_operation_alter().
+ */
+function tengstrom_general_entity_operation_alter(array &$operations, EntityInterface $entity) {
+  /** @var \Drupal\tengstrom_general\HookHandlers\FormAlterHandlers\EntityOperationsAlterHandler $service */
+  $service = \Drupal::service('tengstrom_general.hook_handlers.entity_operations_alter');
+
+  $service->alter($operations, $entity);
 }
 
 /**
